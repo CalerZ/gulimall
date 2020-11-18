@@ -16,6 +16,7 @@
         <module>gulimall-coupon</module>
         <module>gulimall-order</module>
         <module>gulimall-ware</module>
+        <module>renren-generator</module>
         <module>renren-fast</module>
         <module>gulimall_common</module>
         <module>gulimall_gateway</module>
@@ -32,13 +33,6 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.springframework.boot</groupId>
-                <artifactId>spring-boot-maven-plugin</artifactId>
-                <configuration>
-                    <skip>true</skip>
                 </configuration>
             </plugin>
         </plugins>
