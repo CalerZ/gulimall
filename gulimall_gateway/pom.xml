@@ -9,7 +9,7 @@
         <relativePath/> <!-- lookup parent from repository -->
     </parent>
     <groupId>com.atguigu.gulimall</groupId>
-    <artifactId>gulimall_gatewall</artifactId>
+    <artifactId>gulimall_gateway</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall_gateway</name>
     <packaging>jar</packaging>
