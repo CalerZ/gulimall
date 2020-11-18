@@ -6,13 +6,10 @@ import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
-import java.util.Date;
 import java.util.List;
-
 import com.sun.istack.internal.NotNull;
-import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
-import org.hibernate.validator.constraints.URL;
+
 
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotBlank;
