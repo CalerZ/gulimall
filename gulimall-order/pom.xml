@@ -12,6 +12,7 @@
     <artifactId>gulimall-order</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall-order</name>
+    <packaging>war</packaging>
     <description>订单</description>
 
     <properties>

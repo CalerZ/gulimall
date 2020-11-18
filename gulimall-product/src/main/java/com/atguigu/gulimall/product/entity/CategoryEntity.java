@@ -1,13 +1,22 @@
 package com.atguigu.gulimall.product.entity;
 
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableLogic;
 import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.sun.istack.internal.NotNull;
+import jdk.nashorn.internal.ir.annotations.Ignore;
 import lombok.Data;
+import org.hibernate.validator.constraints.URL;
+
+import javax.validation.constraints.Min;
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.Pattern;
 
 /**
  * 商品三级分类
@@ -29,22 +38,28 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * 分类名称
 	 */
+	@NotBlank
 	private String name;
 	/**
 	 * 父分类id
 	 */
+	@NotNull
 	private Long parentCid;
 	/**
 	 * 层级
 	 */
+	@Min(value = 1L,message = "不能小于1")
 	private Integer catLevel;
 	/**
 	 * 是否显示[0-不显示，1显示]
 	 */
+	@TableLogic(value = "0",delval = "1")
+	@Pattern(regexp = "/^[0-1]$/",message = "状态码不正确")
 	private Integer showStatus;
 	/**
 	 * 排序
 	 */
+	@Min(value = 0,message = "排序数值不正确")
 	private Integer sort;
 	/**
 	 * 图标地址
@@ -59,6 +74,7 @@ public class CategoryEntity implements Serializable {
 	 */
 	private Integer productCount;
 
+	@TableField(exist = false)
 	private List<CategoryEntity> children;
 
 }
