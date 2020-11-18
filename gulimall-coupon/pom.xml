@@ -12,7 +12,7 @@
     <artifactId>gulimall-coupon</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall-coupon</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>Demo project for Spring Boot</description>
 
     <properties>

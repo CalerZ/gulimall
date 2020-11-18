@@ -12,7 +12,7 @@
     <artifactId>gulimall-order</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>gulimall-order</name>
-    <packaging>war</packaging>
+    <packaging>jar</packaging>
     <description>订单</description>
 
     <properties>
