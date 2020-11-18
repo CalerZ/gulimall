@@ -4,7 +4,7 @@ spring:
         druid:
             driver-class-name: com.mysql.cj.jdbc.Driver
             url: jdbc:mysql://122.112.200.54:3306/renren_fast?useUnicode=true&characterEncoding=UTF-8&serverTimezone=Asia/Shanghai
-            username: renren
+            username: root
             password: Z950826kl.
             initial-size: 10
             max-active: 100
