@@ -5,7 +5,6 @@
 	<groupId>io.renren</groupId>
 	<artifactId>renren-fast</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>jar</packaging>
 	<description>renren-fast</description>
 
 	<parent>
@@ -42,12 +41,12 @@
 		<hutool.version>4.1.1</hutool.version>
 		<lombok.version>1.18.4</lombok.version>
 
-		<!--wagon plugin 配置-->
-		<service-path>/work/renren</service-path>
-		<pack-name>${project.artifactId}-${project.version}.jar</pack-name>
-		<remote-addr>192.168.1.10:22</remote-addr>
-		<remote-username>root</remote-username>
-		<remote-passwd>123456</remote-passwd>
+<!--		&lt;!&ndash;wagon plugin 配置&ndash;&gt;-->
+<!--		<service-path>/work/renren</service-path>-->
+<!--		<pack-name>${project.artifactId}-${project.version}.jar</pack-name>-->
+<!--		<remote-addr>192.168.1.10:22</remote-addr>-->
+<!--		<remote-username>root</remote-username>-->
+<!--		<remote-passwd>123456</remote-passwd>-->
 	</properties>
 
 	<dependencies>
@@ -241,20 +240,19 @@
 
 	<build>
 
+
+		<!--<finalName>${project.artifactId}-${project.version}.jar</finalName>
 		<extensions>
 			<extension>
 				<groupId>org.apache.maven.wagon</groupId>
 				<artifactId>wagon-ssh</artifactId>
 				<version>2.8</version>
 			</extension>
-		</extensions>
+		</extensions>-->
 		<plugins>
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
-				<configuration>
-					<fork>true</fork>
-				</configuration>
 			</plugin>
 			<!-- 跳过单元测试 -->
 			<plugin>
@@ -264,7 +262,7 @@
 					<skipTests>true</skipTests>
 				</configuration>
 			</plugin>
-			<plugin>
+			<!--<plugin>
 				<groupId>org.codehaus.mojo</groupId>
 				<artifactId>wagon-maven-plugin</artifactId>
 				<version>1.0</version>
@@ -272,14 +270,14 @@
 					<fromFile>target/${pack-name}</fromFile>
 					<url><![CDATA[scp://${remote-username}:${remote-passwd}@${remote-addr}${service-path}]]></url>
 					<commands>
-						<!-- Kill Old Process -->
+						&lt;!&ndash; Kill Old Process &ndash;&gt;
 						<command>kill -9 `ps -ef |grep ${project.artifactId}.jar|grep -v "grep" |awk '{print $2}'`</command>
-						<!-- Restart jar package，write result into renren.log -->
-						<command><![CDATA[nohup java -jar ${service-path}/${pack-name} --spring.profiles.active=test > ${service-path}/renren.log 2>&1 & ]]></command>
+						&lt;!&ndash; Restart jar package，write result into renren.log &ndash;&gt;
+						<command><![CDATA[nohup java -jar ${service-path}/${pack-name} &#45;&#45;spring.profiles.active=test > ${service-path}/renren.log 2>&1 & ]]></command>
 						<command><![CDATA[netstat -nptl]]></command>
 						<command><![CDATA[ps -ef | grep java | grep -v grep]]></command>
 					</commands>
-					<!-- 运行命令 mvn clean package wagon:upload-single wagon:sshexec-->
+					&lt;!&ndash; 运行命令 mvn clean package wagon:upload-single wagon:sshexec&ndash;&gt;
 					<displayCommandOutputs>true</displayCommandOutputs>
 				</configuration>
 			</plugin>
@@ -288,14 +286,14 @@
 				<groupId>com.spotify</groupId>
 				<artifactId>docker-maven-plugin</artifactId>
 				<version>0.4.14</version>
-				<!--<executions>-->
-					<!--<execution>-->
-						<!--<phase>package</phase>-->
-						<!--<goals>-->
-							<!--<goal>build</goal>-->
-						<!--</goals>-->
-					<!--</execution>-->
-				<!--</executions>-->
+				&lt;!&ndash;<executions>&ndash;&gt;
+				&lt;!&ndash;<execution>&ndash;&gt;
+				&lt;!&ndash;<phase>package</phase>&ndash;&gt;
+				&lt;!&ndash;<goals>&ndash;&gt;
+				&lt;!&ndash;<goal>build</goal>&ndash;&gt;
+				&lt;!&ndash;</goals>&ndash;&gt;
+				&lt;!&ndash;</execution>&ndash;&gt;
+				&lt;!&ndash;</executions>&ndash;&gt;
 				<configuration>
 					<imageName>renren/fast</imageName>
 					<dockerDirectory>${project.basedir}</dockerDirectory>
@@ -307,8 +305,8 @@
 						</resource>
 					</resources>
 				</configuration>
-				<!-- 运行命令 mvn clean package docker:build 打包并生成docker镜像 -->
-			</plugin>
+				&lt;!&ndash; 运行命令 mvn clean package docker:build 打包并生成docker镜像 &ndash;&gt;
+			</plugin>-->
 		</plugins>
 	</build>
 
