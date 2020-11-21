@@ -50,7 +50,7 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * 是否显示[0-不显示，1显示]
 	 */
-	@TableLogic(value = "0",delval = "1")
+
 	@Pattern(regexp = "/^[0-1]$/",message = "状态码不正确")
 	private Integer showStatus;
 	/**
@@ -70,6 +70,12 @@ public class CategoryEntity implements Serializable {
 	 * 商品数量
 	 */
 	private Integer productCount;
+
+	/**
+	 * 是否删除
+	 */
+	@TableLogic(value = "0",delval = "1")
+	private Integer isDelete;
 
 	@TableField(exist = false)
 	private List<CategoryEntity> children;
