@@ -1,7 +1,8 @@
 #!/bin/sh
 ## sed -i 's/\r$//' publish-jar.sh & chmod 777 publish-jar.sh & ./publish-jar.sh
 BUILD_ID=DONTKILLME #后台执行
-arr=("gulimall-product" "gulimall_gateway" "renren-fast")
+#arr=("gulimall_gateway")
+arr=("renren-fast")
 # shellcheck disable=SC2068
 for k in ${arr[@]}; do
   houzhui="-0.0.1-SNAPSHOT.jar"

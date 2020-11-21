@@ -43,6 +43,7 @@ spring:
     nacos:
       discovery:
         server-addr: 122.112.200.54:8848
+        ip: 122.112.200.54
 #  resources:
 #    add-mappings: false
 
