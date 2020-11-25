@@ -1,7 +1,8 @@
 package com.atguigu.gulimall.product.exception;
 
-import com.atguigu.common.constant.ExtConstant;
+import com.atguigu.common.constant.ComConstant;
 import com.atguigu.common.utils.R;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -17,6 +18,7 @@ import java.util.Map;
  * @create 2020-11-17 15:44
  * @description :
  */
+@Slf4j
 @RestControllerAdvice
 public class GlobHandleException {
 
@@ -28,12 +30,14 @@ public class GlobHandleException {
         fieldErrors.forEach(item->{
             map.put(item.getField(),item.getDefaultMessage());
         });
-        return R.error(ExtConstant.VALID_EXCEPTION.getCode(),ExtConstant.VALID_EXCEPTION.getMessage()).put("data",map);
+        log.error(e.getMessage(),e);
+        return R.error(ComConstant.VALID_EXCEPTION.getCode(), ComConstant.VALID_EXCEPTION.getMessage()).put("data",map);
     }
 
     @ExceptionHandler(value = Exception.class)
     public R handleValid(Exception e ){
-
-        return R.error(ExtConstant.UNKNOWN_EXCEPTION.getCode(),ExtConstant.UNKNOWN_EXCEPTION.getMessage());
+        log.error(e.getMessage(),e);
+        e.printStackTrace();
+        return R.error(ComConstant.UNKNOWN_EXCEPTION.getCode(), ComConstant.UNKNOWN_EXCEPTION.getMessage()).put("exception_msg",e.getMessage()).put("except",e);
     }
 }

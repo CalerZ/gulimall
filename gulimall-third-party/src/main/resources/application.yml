@@ -1,0 +1,26 @@
+server:
+  port: 20000
+spring:
+  application:
+    name: gulimall-third-party
+  cloud:
+    nacos:
+      discovery:
+        server-addr: http://122.112.200.54:8848
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/gulimall_pms?useUnicode=true&characterEncoding=UTF-8&useSSL=false&serverTimezone=Asia/Shanghai
+    username: root
+    password: root
+
+
+
+
+
+oss:
+  endpoint: oss-cn-beijing.aliyuncs.com
+  accessKeyId: LTAI4G7JvKrT8Tvzo6dV6CvC
+  accessKeySecret: BrdbXwGlQtJvZK8TwCTkwnzeCH8JK7
+  bucketName: guli-z
+  callbackUrl:
+  dir: /

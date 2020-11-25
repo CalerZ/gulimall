@@ -8,18 +8,21 @@ import java.util.Map;
 * import org.apache.shiro.authz.annotation.RequiresPermissions;
 */
 
+import com.atguigu.common.validgroups.SaveGroup;
+import com.atguigu.common.validgroups.UpdateGroup;
+import com.atguigu.gulimall.product.vo.CategoryEntityVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gulimall.product.entity.CategoryEntity;
 import com.atguigu.gulimall.product.service.CategoryService;
 import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 
+import javax.validation.Valid;
 
 
 /**
@@ -29,6 +32,7 @@ import com.atguigu.common.utils.R;
  * @email caleb@gmail.com
  * @date 2020-10-20 16:49:05
  */
+@Api(value = "CategoryController",tags = "商品三级分类")
 @RestController
 @RequestMapping("product/category")
 public class CategoryController {
@@ -38,42 +42,45 @@ public class CategoryController {
     /**
      * 列表
      */
-    @RequestMapping("/list/tree")
+    @GetMapping("/list/tree")
+    @ApiOperation(value = "获取树形分类",tags = {""},notes = "")
     //@RequiresPermissions("product:category:list")
     public R listTree(){
-        List<CategoryEntity> categoryEntities = categoryService.listWithTree();
-        return R.ok().put("data", categoryEntities);
+        List<CategoryEntityVo> categoryEntities = categoryService.listWithTree();
+        return R.ok().putData(categoryEntities);
     }
 
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @GetMapping("/list")
+    @ApiOperation(value = "获取所有分类",tags = {""},notes = "")
     //@RequiresPermissions("product:category:list")
     public R list(@RequestParam Map<String, Object> params){
         PageUtils page = categoryService.queryPage(params);
-
-        return R.ok().put("page", page);
+        return R.ok().putData(page);
     }
 
 
     /**
      * 信息
      */
-    @RequestMapping("/info/{catId}")
+    @GetMapping("/info/{catId}")
+    @ApiOperation(value = "根据分类ID获取分类信息",tags = {""},notes = "")
     //@RequiresPermissions("product:category:info")
     public R info(@PathVariable("catId") Long catId){
 		CategoryEntity category = categoryService.getById(catId);
 
-        return R.ok().put("category", category);
+        return R.ok().putData(category);
     }
 
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @ApiOperation(value = "保存分类信息",tags = {""},notes = "")
+    @PostMapping("/save")
     //@RequiresPermissions("product:category:save")
-    public R save(@RequestBody CategoryEntity category){
+    public R save(@Validated(value = SaveGroup.class) @RequestBody CategoryEntityVo category){
 		categoryService.save(category);
 
         return R.ok();
@@ -82,10 +89,24 @@ public class CategoryController {
     /**
      * 修改
      */
-    @RequestMapping("/update")
+
+    @PostMapping("/update")
+    @ApiOperation(value = "修改分类信息",tags = {""},notes = "")
     //@RequiresPermissions("product:category:update")
-    public R update(@RequestBody CategoryEntity category){
+    public R update(@Validated(value = UpdateGroup.class) @RequestBody CategoryEntityVo category){
 		categoryService.updateById(category);
+
+        return R.ok();
+    }
+
+    /**
+     * 修改
+     */
+    @PostMapping("/update/muti")
+    @ApiOperation(value = "批量修改分类信息",tags = {""},notes = "")
+    //@RequiresPermissions("product:category:update")
+    public R update(@Valid @RequestBody List<CategoryEntity>  category){
+        categoryService.update(category);
 
         return R.ok();
     }
@@ -93,11 +114,11 @@ public class CategoryController {
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @ApiOperation(value = "删除分类信息",tags = {""},notes = "")
+    @PostMapping("/delete")
     //@RequiresPermissions("product:category:delete")
     public R delete(@RequestBody Long[] catIds){
 		categoryService.removeByIds(Arrays.asList(catIds));
-
         return R.ok();
     }
 

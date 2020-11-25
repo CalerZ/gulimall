@@ -1,18 +1,23 @@
 package com.atguigu.gulimall.product.controller;
 
 import java.util.Arrays;
+import java.util.List;
 import java.util.Map;
 
 /**
 * import org.apache.shiro.authz.annotation.RequiresPermissions;
 */
 
+import com.atguigu.common.utils.PageForm;
+import com.atguigu.common.validgroups.SaveGroup;
+import com.atguigu.common.validgroups.UpdateGroup;
+import com.atguigu.gulimall.product.vo.AttrEntityVo;
+import io.swagger.annotations.Api;
+import io.swagger.annotations.ApiImplicitParam;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.validation.annotation.Validated;
+import org.springframework.web.bind.annotation.*;
 
 import com.atguigu.gulimall.product.entity.AttrEntity;
 import com.atguigu.gulimall.product.service.AttrService;
@@ -28,6 +33,7 @@ import com.atguigu.common.utils.R;
  * @email caleb@gmail.com
  * @date 2020-10-20 16:49:05
  */
+@Api(value = "AttrController",tags = {"商品属性"})
 @RestController
 @RequestMapping("product/attr")
 public class AttrController {
@@ -37,57 +43,62 @@ public class AttrController {
     /**
      * 列表
      */
-    @RequestMapping("/list")
+    @PostMapping("/list")
     //@RequiresPermissions("product:attr:list")
-    public R list(@RequestParam Map<String, Object> params){
-        PageUtils page = attrService.queryPage(params);
-
-        return R.ok().put("page", page);
+    public R list(@RequestBody PageForm<AttrEntityVo> form){
+        PageUtils page = attrService.queryPage(form);
+        return R.ok().putData(page);
     }
 
+    /**
+     * 列表
+     */
+    @GetMapping("/list")
+    @ApiOperation(value = "获取所有属性")
+    //@RequiresPermissions("product:attr:list")
+    public R list(){
+        List<AttrEntity> entities = attrService.list();
+        return R.ok().putData(entities);
+    }
 
     /**
      * 信息
      */
-    @RequestMapping("/info/{attrId}")
+    @GetMapping("/info/{attrId}")
+    @ApiOperation(value = "根据属性ID获取属性信息")
     //@RequiresPermissions("product:attr:info")
     public R info(@PathVariable("attrId") Long attrId){
 		AttrEntity attr = attrService.getById(attrId);
-
-        return R.ok().put("attr", attr);
+        return R.ok().putData(attr);
     }
 
     /**
      * 保存
      */
-    @RequestMapping("/save")
+    @PostMapping("/save")
+    @ApiOperation(value = "保存属性信息")
     //@RequiresPermissions("product:attr:save")
-    public R save(@RequestBody AttrEntity attr){
-		attrService.save(attr);
-
-        return R.ok();
+    public R save(@Validated(value = SaveGroup.class) @RequestBody AttrEntityVo attrEntityVo){
+        return R.ok().putData(attrService.save(attrEntityVo));
     }
 
     /**
      * 修改
      */
-    @RequestMapping("/update")
+    @PostMapping("/update")
+    @ApiOperation(value = "保存属性信息")
     //@RequiresPermissions("product:attr:update")
-    public R update(@RequestBody AttrEntity attr){
-		attrService.updateById(attr);
-
-        return R.ok();
+    public R update(@Validated(value = UpdateGroup.class) @RequestBody AttrEntityVo attrEntityVo){
+        return R.ok().putData(attrService.updateById(attrEntityVo));
     }
 
     /**
      * 删除
      */
-    @RequestMapping("/delete")
+    @PostMapping("/delete")
     //@RequiresPermissions("product:attr:delete")
     public R delete(@RequestBody Long[] attrIds){
-		attrService.removeByIds(Arrays.asList(attrIds));
-
-        return R.ok();
+        return R.ok().putData(attrService.removeByIds(Arrays.asList(attrIds)));
     }
 
 }

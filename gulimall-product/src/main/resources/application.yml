@@ -19,6 +19,7 @@ mybatis-plus:
 logging:
   level:
     com.atguigu.gulimall.product.dao: debug
-
+swagger:
+  enable: true
 
 debug: true

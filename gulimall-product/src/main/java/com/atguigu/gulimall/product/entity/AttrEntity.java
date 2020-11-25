@@ -7,9 +7,11 @@ import java.io.Serializable;
 import java.util.Date;
 import lombok.Data;
 
+import javax.validation.constraints.NotEmpty;
+
 /**
  * 商品属性
- * 
+ *
  * @author caleb
  * @email caleb@gmail.com
  * @date 2020-10-20 16:28:01

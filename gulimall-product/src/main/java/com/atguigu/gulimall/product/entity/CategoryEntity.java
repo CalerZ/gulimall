@@ -7,7 +7,11 @@ import com.baomidou.mybatisplus.annotation.TableName;
 
 import java.io.Serializable;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Data;
+import org.hibernate.validator.constraints.Range;
+import org.hibernate.validator.constraints.URL;
 
 
 import javax.validation.constraints.Min;
@@ -35,28 +39,22 @@ public class CategoryEntity implements Serializable {
 	/**
 	 * 分类名称
 	 */
-	@NotBlank
 	private String name;
 	/**
 	 * 父分类id
 	 */
-	@NotNull
 	private Long parentCid;
 	/**
 	 * 层级
 	 */
-	@Min(value = 1L,message = "不能小于1")
 	private Integer catLevel;
 	/**
 	 * 是否显示[0-不显示，1显示]
 	 */
-
-	@Pattern(regexp = "/^[0-1]$/",message = "状态码不正确")
 	private Integer showStatus;
 	/**
 	 * 排序
 	 */
-	@Min(value = 0,message = "排序数值不正确")
 	private Integer sort;
 	/**
 	 * 图标地址
@@ -76,8 +74,5 @@ public class CategoryEntity implements Serializable {
 	 */
 	@TableLogic(value = "0",delval = "1")
 	private Integer isDelete;
-
-	@TableField(exist = false)
-	private List<CategoryEntity> children;
 
 }

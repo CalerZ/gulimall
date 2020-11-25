@@ -11,7 +11,9 @@ package com.atguigu.common.utils;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * 分页工具类
@@ -106,5 +108,13 @@ public class PageUtils implements Serializable {
 	public void setList(List<?> list) {
 		this.list = list;
 	}
+
+	public static Map<String,Object> convert(PageForm form){
+		Map<String,Object> params = new HashMap<>();
+		params.put(Constant.PAGE,form.getCurrPage());
+		params.put(Constant.LIMIT,form.getPageSize());
+		return params;
+	}
+
 
 }
