@@ -12,7 +12,7 @@ server:
 spring:
   # 环境 dev|test|prod
   profiles:
-    active: prod
+    active: dev
   # jackson时间格式化
   jackson:
     time-zone: GMT+8
@@ -43,7 +43,7 @@ spring:
     nacos:
       discovery:
         server-addr: 122.112.200.54:8848
-        ip: 122.112.200.54
+#        ip: 122.112.200.54
 #  resources:
 #    add-mappings: false
 
@@ -67,7 +67,6 @@ mybatis-plus:
     cache-enabled: false
     call-setters-on-nulls: true
     jdbc-type-for-null: 'null'
-
 
 renren:
   redis:

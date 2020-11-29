@@ -29,7 +29,7 @@ public class CategoryEntityVo implements Serializable {
      * 分类id
      */
     @ApiModelProperty(name = "分类id")
-    @NotEmpty(message = "更新时ID不能为空",groups = {UpdateGroup.class})
+    @NotNull(message = "更新时ID不能为空",groups = {UpdateGroup.class})
     private Long catId;
     /**
      * 分类名称
@@ -41,7 +41,7 @@ public class CategoryEntityVo implements Serializable {
      * 父分类id
      */
     @ApiModelProperty(name = "父分类id")
-    @NotEmpty(message = "父ID不能为空",groups = {SaveGroup.class})
+    @NotNull(message = "父ID不能为空",groups = {SaveGroup.class})
     private Long parentCid;
     /**
      * 层级

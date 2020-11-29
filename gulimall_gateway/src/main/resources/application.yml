@@ -7,6 +7,7 @@ spring:
     nacos:
       discovery:
         server-addr: 122.112.200.54:8848
+        ip: 192.168.1.102
     gateway:
       routes:
         - id: test_route

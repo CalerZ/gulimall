@@ -16,7 +16,7 @@
         <module>gulimall-coupon</module>
         <module>gulimall-order</module>
         <module>gulimall-ware</module>
-        <module>renren-generator</module>
+<!--        <module>renren-generator</module>-->
         <module>renren-fast</module>
         <module>gulimall_common</module>
         <module>gulimall_gateway</module>
@@ -24,7 +24,6 @@
 
 
     <build>
-
         <plugins>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>

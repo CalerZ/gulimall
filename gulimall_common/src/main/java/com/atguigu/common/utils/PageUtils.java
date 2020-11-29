@@ -9,6 +9,8 @@
 package com.atguigu.common.utils;
 
 import com.baomidou.mybatisplus.core.metadata.IPage;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
+import org.springframework.beans.BeanUtils;
 
 import java.io.Serializable;
 import java.util.HashMap;
@@ -114,6 +116,12 @@ public class PageUtils implements Serializable {
 		params.put(Constant.PAGE,form.getCurrPage());
 		params.put(Constant.LIMIT,form.getPageSize());
 		return params;
+	}
+
+	public static IPage convertPage(IPage<?> page){
+		IPage<Object> objectPage = new Page<>();
+		BeanUtils.copyProperties(page,objectPage);
+		return objectPage;
 	}
 
 

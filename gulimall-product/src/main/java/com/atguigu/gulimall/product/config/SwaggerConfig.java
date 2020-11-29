@@ -38,9 +38,9 @@ public class SwaggerConfig {
     private ApiInfo apiInfo() {
         return new ApiInfoBuilder()
                 // 页面标题
-                .title("gulimall")
+                .title("gulimall-product")
                 // 创建人信息
-                .contact(new Contact("MrZhang",  "https://www.cnblogs.com/zs-notes/category/1258467.html",  "1729497919@qq.com"))
+                .contact(new Contact("Caleb Zhao",  "",  ""))
                 // 版本号
                 .version("1.0")
                 // 描述

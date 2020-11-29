@@ -3,10 +3,15 @@ package com.atguigu.gulimall.product.service.impl;
 import com.atguigu.common.utils.PageForm;
 import com.atguigu.gulimall.product.dao.CategoryBrandRelationDao;
 import com.atguigu.gulimall.product.vo.BrandEntityVo;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 import java.util.Map;
+import java.util.stream.Collectors;
+
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
 import com.baomidou.mybatisplus.core.metadata.IPage;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -68,8 +73,8 @@ public class BrandServiceImpl extends ServiceImpl<BrandDao, BrandEntity> impleme
                 new Query<BrandEntity>().getPage(PageUtils.convert(form)),
                 queryWrapper
         );
-
-        return new PageUtils(page);
+        //TODO 如何将entity对象转为entityVo
+        return new PageUtils(PageUtils.convertPage(page));
     }
 
     @Override
