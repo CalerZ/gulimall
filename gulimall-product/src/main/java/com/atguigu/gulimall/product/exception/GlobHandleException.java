@@ -34,6 +34,13 @@ public class GlobHandleException {
         return R.error(ComConstant.VALID_EXCEPTION.getCode(), ComConstant.VALID_EXCEPTION.getMessage()).put("data",map);
     }
 
+    @ExceptionHandler(value = BizCustException.class)
+    public R handleValid(BizCustException e ){
+        log.error(e.getMessage(),e);
+        e.printStackTrace();
+        return R.error(e.getCode(), e.getMessage()).put("except",e);
+    }
+
     @ExceptionHandler(value = Exception.class)
     public R handleValid(Exception e ){
         log.error(e.getMessage(),e);

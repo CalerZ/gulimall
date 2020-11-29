@@ -2,8 +2,6 @@ package com.atguigu.gulimall.product.controller;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
 
 /**
 * import org.apache.shiro.authz.annotation.RequiresPermissions;
@@ -12,7 +10,7 @@ import java.util.stream.Collectors;
 import com.atguigu.common.utils.PageForm;
 import com.atguigu.common.validgroups.SaveGroup;
 import com.atguigu.common.validgroups.UpdateGroup;
-import com.atguigu.gulimall.product.exception.ErrorStatusCodeException;
+import com.atguigu.gulimall.product.annotation.RepeatFormCommitValidated;
 import com.atguigu.gulimall.product.validate.BrandValidate;
 import com.atguigu.gulimall.product.vo.BrandEntityVo;
 import io.swagger.annotations.*;
@@ -26,7 +24,8 @@ import com.atguigu.common.utils.PageUtils;
 import com.atguigu.common.utils.R;
 
 import javax.annotation.Resource;
-import javax.validation.Valid;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 
 /**
@@ -87,7 +86,9 @@ public class BrandController {
     @ApiOperation(value = "保存品牌信息",tags = {""},notes = "")
     @PostMapping("/save")
     //@RequiresPermissions("product:brand:save")
-    public R save(@Validated(value = SaveGroup.class) @RequestBody BrandEntityVo brand){
+    @RepeatFormCommitValidated
+    public R save(@Validated(value = SaveGroup.class) @RequestBody BrandEntityVo brand, HttpServletRequest request, HttpServletResponse response){
+        brandValidate.validateFormDulipce(request,brand,response);
         return R.ok().putData(brandService.save(brand));
     }
 
